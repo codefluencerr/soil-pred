@@ -1,48 +1,48 @@
 # Importing essential libraries and modules
 
 from flask import Flask, request, jsonify
-import pickle
-# from werkzeug.datastructures import FileStorage
-from PIL import Image as im
-from tensorflow import keras
-from flask import Flask, request, jsonify
-from keras.preprocessing import image
-import cv2
-import numpy as np
-# import time
-# import cloudinary
-import cloudinary.uploader
-import cloudinary.api
-from cloudinary.utils import cloudinary_url
+# import pickle
+# # from werkzeug.datastructures import FileStorage
+# from PIL import Image as im
+# from tensorflow import keras
+# from flask import Flask, request, jsonify
+# from keras.preprocessing import image
+# import cv2
+# import numpy as np
+# # import time
+# # import cloudinary
+# import cloudinary.uploader
+# import cloudinary.api
+# from cloudinary.utils import cloudinary_url
 
 
-crop_recommendation_model_path = 'Agro-NBClassifier.pkl'
-crop_recommendation_model = pickle.load(
-    open(crop_recommendation_model_path, 'rb'))
+# crop_recommendation_model_path = 'Agro-NBClassifier.pkl'
+# crop_recommendation_model = pickle.load(
+#     open(crop_recommendation_model_path, 'rb'))
 
 
 app = Flask(__name__)
 
 
-@app.route('/crop_predict', methods=['GET'])
-def testt():
-    nitrogen = int(request.args.get("nitrogen"))
-    phosphorous = int(request.args.get('phosphorous'))
-    pottasium = int(request.args.get('pottasium'))
-    temperature = float(request.args.get('temperature'))
-    humidity = float(request.args.get('humidity'))
-    ph_level = float(request.args.get('ph_level'))
-    rainfall = float(request.args.get('rainfall'))
-    result = crop_recommendation_model.predict(
-        [[nitrogen, phosphorous, pottasium, temperature, humidity, ph_level, rainfall]])
-    print(result)
-    return jsonify({"result": str(result[0])}), 200
+# @app.route('/crop_predict', methods=['GET'])
+# def testt():
+#     nitrogen = int(request.args.get("nitrogen"))
+#     phosphorous = int(request.args.get('phosphorous'))
+#     pottasium = int(request.args.get('pottasium'))
+#     temperature = float(request.args.get('temperature'))
+#     humidity = float(request.args.get('humidity'))
+#     ph_level = float(request.args.get('ph_level'))
+#     rainfall = float(request.args.get('rainfall'))
+#     result = crop_recommendation_model.predict(
+#         [[nitrogen, phosphorous, pottasium, temperature, humidity, ph_level, rainfall]])
+#     print(result)
+#     return jsonify({"result": str(result[0])}), 200
 
 
 # ===============================================================================================
-# weed and soil project
-img_width, img_height = 150, 150
-model = keras.models.load_model('soil/SoilDetection_own1.h5')
+# # weed and soil project
+# img_width, img_height = 150, 150
+# model = keras.models.load_model('soil/SoilDetection_own1.h5')
 app = Flask(__name__)
 
 
@@ -54,24 +54,24 @@ app = Flask(__name__)
 # LABELS = open(labelsPath).read().strip().split("\n")
 
 
-def predict_soil(path):
-    img_pred = image.load_img(path, target_size=(img_height, img_width))
-    img_pred = image.img_to_array(img_pred)
-    img = np.expand_dims(img_pred, axis=0)
-    res = model.predict_classes(img)
-    prob = model.predict_proba(img)
-    print('predicted class:', res)
-    print('predicted probability:', prob[0])
-    if res[0] == 0:
-        prediction = "Alluvial soil"
-    elif res[0] == 1:
-        prediction = "Black soil"
-    elif res[0] == 2:
-        prediction = "Clay soil"
-    else:
-        prediction = "Red soil"
-    print("Predicted Class", prediction)
-    return prediction
+# def predict_soil(path):
+#     img_pred = image.load_img(path, target_size=(img_height, img_width))
+#     img_pred = image.img_to_array(img_pred)
+#     img = np.expand_dims(img_pred, axis=0)
+#     res = model.predict_classes(img)
+#     prob = model.predict_proba(img)
+#     print('predicted class:', res)
+#     print('predicted probability:', prob[0])
+#     if res[0] == 0:
+#         prediction = "Alluvial soil"
+#     elif res[0] == 1:
+#         prediction = "Black soil"
+#     elif res[0] == 2:
+#         prediction = "Clay soil"
+#     else:
+#         prediction = "Red soil"
+#     print("Predicted Class", prediction)
+#     return prediction
 
 
 # def upload_file(file_to_upload):
@@ -186,13 +186,13 @@ def predict_soil(path):
 #     # cv2.destroyAllWindows()
 
 
-@app.route('/soil', methods=['POST'])
-def handle_soil():
-    file_to_upload = request.files['file']
-    print(type(file_to_upload))
-    file_to_upload.save('input_file.jpg')
-    result = predict_soil('input_file.jpg')
-    return jsonify({"result": result}), 200
+# @app.route('/soil', methods=['POST'])
+# def handle_soil():
+#     file_to_upload = request.files['file']
+#     print(type(file_to_upload))
+#     file_to_upload.save('input_file.jpg')
+#     result = predict_soil('input_file.jpg')
+#     return jsonify({"result": result}), 200
 
 
 @app.route('/v1', methods=['POST'])
