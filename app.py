@@ -1,12 +1,11 @@
 # Importing essential libraries and modules
 
 from flask import Flask, request, jsonify
-from tensorflow import keras
+# from tensorflow import keras
 from flask import Flask, request, jsonify
 from keras.preprocessing import image
 import numpy as np
-
-
+from tensorflow.keras import models
 # crop_recommendation_model_path = 'Agro-NBClassifier.pkl'
 # crop_recommendation_model = pickle.load(
 #     open(crop_recommendation_model_path, 'rb'))
@@ -18,7 +17,7 @@ app = Flask(__name__)
 # ===============================================================================================
 # # weed and soil project
 img_width, img_height = 150, 150
-model = keras.models.load_model('soil/SoilDetection_own1.h5')
+model = models.load_model('soil/SoilDetection_own1.h5')
 app = Flask(__name__)
 
 
