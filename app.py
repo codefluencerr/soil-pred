@@ -186,13 +186,14 @@ app = Flask(__name__)
 #     # cv2.destroyAllWindows()
 
 
-# @app.route('/soil', methods=['POST'])
-# def handle_soil():
-#     file_to_upload = request.files['file']
-#     print(type(file_to_upload))
-#     file_to_upload.save('input_file.jpg')
-#     result = predict_soil('input_file.jpg')
-#     return jsonify({"result": result}), 200
+@app.route('/soil', methods=['POST'])
+def handle_soil():
+    file_to_upload = request.files['file']
+    print(type(file_to_upload))
+    file_to_upload.save('input_file.jpg')
+    # result = predict_soil('input_file.jpg')
+    # return jsonify({"result": result}), 200
+    return jsonify({"result": 'wola'}), 200
 
 
 @app.route('/v1', methods=['POST'])
