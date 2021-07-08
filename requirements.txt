@@ -1,7 +1,7 @@
-keras_nightly==2.5.0.dev2021032900
-numpy==1.19.5
-tensorflow-cpu==2.5.0
-Flask==1.1.2
-keras==2.4.3
-gunicorn==19.9.0
+keras_nightly
+numpy
+tensorflow-cpu
+Flask
+keras
+gunicorn
 
