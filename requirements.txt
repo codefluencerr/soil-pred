@@ -4,3 +4,4 @@ Flask==1.1.2
 numpy==1.19.5
 keras==2.4.3
 gunicorn
+Pillow==8.3.1
