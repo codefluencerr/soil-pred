@@ -3,21 +3,20 @@
 from flask import Flask, request, jsonify
 # from tensorflow import keras
 from flask import Flask, request, jsonify
-from keras.preprocessing import image
+from tensorflow.keras.preprocessing import image
 import numpy as np
-from tensorflow.keras import models
+# from tensorflow.python.keras.utils.generic_utils import populate_dict_with_module_objects, to_snake_cas
+from tensorflow.keras.models import load_model
 # crop_recommendation_model_path = 'Agro-NBClassifier.pkl'
 # crop_recommendation_model = pickle.load(
 #     open(crop_recommendation_model_path, 'rb'))
-
-
 app = Flask(__name__)
 
 
 # ===============================================================================================
 # # weed and soil project
 img_width, img_height = 150, 150
-model = models.load_model('soil/SoilDetection_own1.h5')
+model = load_model('soil/SoilDetection_own1.h5')
 app = Flask(__name__)
 
 
